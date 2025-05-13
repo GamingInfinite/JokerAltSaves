@@ -1,0 +1,17 @@
+{
+    "name": "Balatro Alt Saves",
+    "id": "jas",
+    "version": "1.0.0",
+    "website_url": "",
+    "description": "A mod that allows you to set your profile prefix to whatever you want.",
+    "prefix": "jas",
+    "author": ["Samantha"],
+    "main_file": "AltSaves.lua",
+    "priority": -100,
+    "badge_colour": "FE0001",
+    "dependencies": [
+        "Steamodded"
+    ],
+    "conflicts": [
+    ]
+}

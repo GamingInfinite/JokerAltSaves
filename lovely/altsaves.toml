@@ -1,0 +1,42 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = -1
+
+# Make profiles all start with a prefix
+[[patches]]
+[patches.pattern]
+target = "game.lua"
+pattern = 'self:load_profile(G.SETTINGS.profile or 1)'
+position = "before"
+payload = '''
+if not AltSaves then
+    AltSaves = {}
+end
+
+AltSaves.profile_prefix = NFS.read("Mods/JokerAltSaves/AltSaves.txt") or "A"
+if type(G.SETTINGS.profile) ~= "string" or G.SETTINGS.profile:sub(1, #AltSaves.profile_prefix) ~= AltSaves.profile_prefix then
+    G.SETTINGS.profile = AltSaves.profile_prefix .. "1"
+end
+for i = 1, 3 do
+    G.PROFILES[AltSaves.profile_prefix .. i] = {}
+end
+'''
+match_indent = true
+
+# Remove the builtin "P" prefix
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = 'profile_data.name = profile_data.name or ("P".._profile)'
+position = "at"
+payload = 'profile_data.name = profile_data.name or (_profile)'
+match_indent = true
+
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = 'G.PROFILES[G.SETTINGS.profile].name = "P"..G.SETTINGS.profile'
+position = "at"
+payload = 'G.PROFILES[G.SETTINGS.profile].name = G.SETTINGS.profile'
+match_indent = true

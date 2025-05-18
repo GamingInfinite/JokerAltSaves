@@ -7,7 +7,7 @@
     "prefix": "jas",
     "author": ["Samantha"],
     "main_file": "AltSaves.lua",
-    "priority": -100,
+    "priority": 115,
     "badge_colour": "FE0001",
     "dependencies": [
         "Steamodded"
